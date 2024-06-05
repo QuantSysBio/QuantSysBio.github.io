@@ -194,6 +194,11 @@ async function checkFilePattern(file_type) {
         var filesFound = [
             '1_DB_search_psm.csv'
         ];
+    } else if (file_type === 'proteome') {
+        var filesFound = [
+            'proteome_combined.fasta', 'host_host_MusMusculus.fasta',
+            'pathogen_pathogen_Listeria.fasta',
+        ];
     }
 
     if (file_type !== 'blank') {
