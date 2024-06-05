@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
-	<script src="{{url_for('static', filename='index.js')}}"></script>
+
+
+    <link rel="stylesheet" href="css/styles.css">
+	<script src="static/index.js">
+		wage.addEventListener("keydown", function (e) {
+			if (e.keyCode === 13) {
+				validate(e);
+			}
+		});
+	</script>
 	<title>inSPIRE-Interactive</title>
 </head>
 <body>
@@ -100,7 +108,7 @@
         <center>
         <div class = "team-img">
 
-            <img src="{{url_for('static', filename='aboutus.jpeg')}}" width="842px" height = " 600px"/>
+            <img src="img/aboutus.jpeg" width="842px" height = " 600px"/>
             <p>
                 Outside of the primary developers, <b>inSPIRE</b> and <b>inSPIRE-interactive</b> have benefited from input from within the Quantitative and Systems Biology group
                 and our collaborators.

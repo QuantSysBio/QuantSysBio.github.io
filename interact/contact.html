@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
-	<script src="{{url_for('static', filename='index.js')}}"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+	<script src="static/index.js">
+		wage.addEventListener("keydown", function (e) {
+			if (e.keyCode === 13) {
+				validate(e);
+			}
+		});
+	</script>
 	<title>inSPIRE-Interactive</title>
 </head>
 <body>
