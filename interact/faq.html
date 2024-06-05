@@ -6,7 +6,57 @@
 	<title>inSPIRE-Interactive</title>
 </head>
 <body>
-	{{ inspire_header|safe }}
+	<!-- header -->
+    <dev class  = "header">
+        <dev class = "header-left">
+            <img src="img/inSPIRE-logo-nobg.png"
+            class = "inSPIRE-logo-nobg" 
+            width = "180px"
+            onclick="goHome('{server_address}')"/>
+        </dev>
+        
+        <!-- Header Center-->
+        <dev class = "home">
+            <a href=https://quantsysbio.github.io/inspire-interactive.html> <p class = "home-text"> Home </p>
+            </a>
+        </dev>
+
+        <dev class = "about-us">
+            <a href=https://quantsysbio.github.io/interact/about.html> <p class = "about-us-text"> About </p>
+            </a>
+        </dev>
+
+        <dev class = "contact">
+            <a href=https://quantsysbio.github.io/interact/contact.html> <p class = "contact-text"> Contact </p>
+            </a>
+        </dev>
+
+        <dev class = "FAQ">
+            <a href=https://quantsysbio.github.io/interact/faq.html> <p class = "FAQ-text"> FAQ </p>
+            </a>
+        </dev>
+
+        <dev class = "view-queue">
+            <a href=https://quantsysbio.github.io/interact/view-queue.html> <p class = "view-queue-text">Job Queue</p>
+            </a>
+        </dev>
+
+        <dev class = "header-right">
+
+            <button type="button" class = "button-git"  
+                onclick="location.href='https://github.com/QuantSysBio/inSPIRE';">
+                <p>&nbsp;&nbsp;GIT HUB</p>
+            </button>
+        
+
+       
+            <button type="button" class = "button"
+                onclick="location.href='https://quantsysbio.github.io/interact/interact.html';">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;GET STARTED</p>
+            </button>
+        </dev>
+
+    </dev>
 
     <div class = "contact-main-section">
         <div class = "contact-top-section">
