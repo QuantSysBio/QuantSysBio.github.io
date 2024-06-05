@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/styles.css">
+	<script src="../static/index.js">
+		wage.addEventListener("keydown", function (e) {
+			if (e.keyCode === 13) {
+				validate(e);
+			}
+		});
+	</script>
+	<title>inSPIRE-Interactive</title>
+</head>
+<body>
+	<!-- header -->
+    <dev class  = "header">
+        <dev class = "header-left">
+            <img src="../img/inSPIRE-logo-nobg.png"
+            class = "inSPIRE-logo-nobg" 
+            width = "180px"
+            onclick="goHome()"/>
+        </dev>
+        
+        <!-- Header Center-->
+        <dev class = "home">
+            <a href=https://quantsysbio.github.io/inspire-interactive.html> <p class = "home-text"> Home </p>
+            </a>
+        </dev>
+
+        <dev class = "about-us">
+            <a href=https://quantsysbio.github.io/interact/about.html> <p class = "about-us-text"> About </p>
+            </a>
+        </dev>
+
+        <dev class = "contact">
+            <a href=https://quantsysbio.github.io/interact/contact.html> <p class = "contact-text"> Contact </p>
+            </a>
+        </dev>
+
+        <dev class = "FAQ">
+            <a href=https://quantsysbio.github.io/interact/faq.html> <p class = "FAQ-text"> FAQ </p>
+            </a>
+        </dev>
+
+        <dev class = "view-queue">
+            <a href=https://quantsysbio.github.io/interact/view-queue.html> <p class = "view-queue-text">Job Queue</p>
+            </a>
+        </dev>
+
+        <dev class = "header-right">
+
+            <button type="button" class = "button-git"  
+                onclick="location.href='https://github.com/QuantSysBio/inSPIRE';">
+                <p>&nbsp;&nbsp;GIT HUB</p>
+            </button>
+        
+
+       
+            <button type="button" class = "button"
+                onclick="location.href='https://quantsysbio.github.io/interact/interact.html';">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;GET STARTED</p>
+            </button>
+        </dev>
+
+    </dev>
+    <div class = "contact-main-section">
+        <div class = "contact-top-section">
+             <p> References
+             </p>
+        </div>
+    </div>
+
+
+    <!-- First main -->
+    <dev class = "contact-main-section">
+        <dev class = "contact-top-section-description" style="height:300px">
+            <dev>
+            <p><b>inSPIRE Specific Papers</b></p>
+            <p>
+                Please cite the following article if you are using inSPIRE in your research:
+            </p>
+            
+            <p>
+                Cormican, J. A., Horokhovskyi, Y., Soh, W. T., Mishto, M., and Liepe, J. (2022) inSPIRE: An open-source tool for increased mass spectrometry identification rates using Prosit spectral prediction. Mol Cell Proteomics.
+                (doi: <a href="https://doi.org/10.1016/j.mcpro.2022.100432">doi.org/10.1016/j.mcpro.2022.100432</a>)
+            </p>
+            <p>
+                Another article will soon be describing the development of inSPIRE 2.0 and inSPIRE-Pathogen.
+            </p>
+            <p><b>Tools used by inSPIRE</b></p>
+            <p>
+                Please also cite the relevant publications of the rescoring tools used, see details on <a href=https://github.com/percolator/percolator>Percolator</a> and  <a href="https://github.com/wfondrie/mokapot">Mokapot</a>.
+            </p>
+    
+            <p>
+                Please also cite the relevant publications of the spectral predictors, see details on <a href="https://www.proteomicsdb.org/prosit">Prosit</a>.
+            </p>
+    
+            <p>
+                If using inSPIRE-affinity please also cite the relevant publications for <a href="https://services.healthtech.dtu.dk/service.php?NetMHCpan-4.1">NetMHCpan</a> binding affinity predictions..
+            </p>
+            </dev>
+		
+        </dev>
+	
+    </dev>
+   
+
+</body>
+</html>

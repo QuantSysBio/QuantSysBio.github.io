@@ -612,18 +612,8 @@ async function cancelPipeline(serverAddress, user, project) {
     }
 };
 
-async function cancelJobById(serverAddress) {
-    var configObject = {
-        'jobID': document.getElementById('cancel-job-input').value,
-    };
-    if (confirm("Are you sure you want to cancel execution for job ID " + configObject['jobID'] + "?") == true) {
-        var response = await postJson(serverAddress, 'cancel', configObject);
-        let cancelElem = document.getElementById("cancel-text")
-        cancelElem.innerHTML = response['message'];
-    } else {
-        let cancelElem = document.getElementById("cancel-text")
-        cancelElem.innerHTML = 'No cancellation.';
-    }
+async function cancelJobById() {
+    alert("No jobs running on this demo site.")
 };
 
 async function downloadOutputs(serverAddress, user, project) {

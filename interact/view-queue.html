@@ -77,7 +77,7 @@
 
 		<br><br>
 		<center>
-			{{ queue_svg|safe }}
+			<img src="../img/queue.svg">
 		</center>
 
 		<p class="contact-main-section" style="text-align: left; align-items: left;">
@@ -89,7 +89,7 @@
 				</form>
 			</div>
 			<div class="vertical-center" style="height:100px; margin-bottom: 0px; margin-top: 0px;">
-				<button id="cancel-job-button" class="job-button" onclick="cancelJobById('{{ server_address }}')">
+				<button id="cancel-job-button" class="job-button" onclick="cancelJobById()">
 					Cancel Selected Job
 				</button>
 			</div>
