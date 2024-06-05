@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="css/styles.css">
-	<script src="static/index.js">
-		wage.addEventListener("keydown", function (e) {
-			if (e.keyCode === 13) {
-				validate(e);
-			}
-		});
-	</script>
+	<link rel='stylesheet' type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+	<script src="{{url_for('static', filename='index.js')}}"></script>
 	<title>inSPIRE-Interactive</title>
 </head>
-<body>
+<body>	
 	<dev class = "page-wrapper">
 	
-		<!-- header -->
 		<!-- header -->
         <dev class  = "header">
             <dev class = "header-left">
@@ -66,39 +59,48 @@
             </dev>
     
         </dev>
+        <hr>
+        <br><br>
+        <div class = "download-div">
+            <div style=" width:1404px; padding-left: 30px; text-align: left; background: linear-gradient(to right, aquamarine 40%, #FFFFFF 58%); ">
+               <p>Choose your inSPIRE option</p>
+           </div>
+       </div>
+        <div style = "display:flex; height:120px; justify-content: center; align-items:center; font-size: larger; ">
+            <div style=" width:1420px;">
+               <p> If you are interested only in increasing peptide identification rates and wish to perform your
+                own downstream analysis select <b>inSPIRE-Standard</b>. For specialised analysis of infeceted
+                cells select <b>inSPIRE-Pathogen</b>.</p>
+            </div>
+        </div>
 
-		<div class = "contact-main-section">
-			<div class = "contact-top-section">
-				 <p> inSPIRE-Interactive Queue
-				 </p>
-			</div>
-		</div>
-		<br><br>
+        <div class="center-content" style="height: 100px;">
+            <div class="buttons"> 
+                <div id="standard-button-div" style = "margin-right:40px;">
+                    <button 
+                    id="inSPIRE-Standard-button" class="white-black-button"
+                    onclick="selectInspireType('standard', '{{ user }}', '{{ project }}')"
+                    >inSPIRE<br>Standard</button>
+                              
+                </div>
+                <div id="select-button-div" style = "margin-left:40px;">
+                    <button 
+                    id="inSPIRE-Select-button" class="black-white-button"
+                    onclick="selectInspireType('pathogen', '{{ user }}', '{{ project }}')"
+                    >inSPIRE<br>Pathogen</button>
+                    
+                </div>
+                
+            </div>
+        </div>
+	
 
-		<br><br>
-		<center>
-			{{ queue_svg|safe }}
-		</center>
-
-		<p class="contact-main-section" style="text-align: left; align-items: left;">
-            You can cancel any job by entering the Job ID in the box below and clicking cancel:
-			
-			<div class="vertical-center" style="height:100px; margin-bottom: 0px;">
-				<form id="cancel-job-form">
-					<input type="text" id="cancel-job-input" name="cancel-job-input" style = "border:2px solid  rgb(5, 208, 141); width:250px;"  class="text-input" onkeypress="textSubmit(event, 'noAction')">
-				</form>
-			</div>
-			<div class="vertical-center" style="height:100px; margin-bottom: 0px; margin-top: 0px;">
-				<button id="cancel-job-button" class="job-button" onclick="cancelJobById('{{ server_address }}')">
-					Cancel Selected Job
-				</button>
-			</div>
-            <div id="cancel-text" class="adjusted-text"></div>
-		</p>
-
-		<br><br>
+       </div>
+       <br><br><br><br>
+       <br><br><br><br>
+        <!--footer-->
 
         {{ inspire_footer|safe }}
-	</dev>
+    </dev>
 </body>
 </html>

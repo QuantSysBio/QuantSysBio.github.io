@@ -14,20 +14,17 @@
  * @param {*} serverAddress address of the server hosting inSPIRE-interact.
  * @param {*} selectedUser user selected by user.
  */
-async function selectUser(serverAddress, selectedUser) {
-    var response = await fetch(
-        'http://' + serverAddress + ':5000/interact/user/' + selectedUser,
-        {
-            method: 'GET',
-        }
-    ).then( response => {
-        return response.json();
-    });
+async function selectUser(selectedUser) {
+    if (selectedUser === 'exampleUser') {
+        var projects = ['exampleProject'];
+    } else {
+        var projects = [];
+    }
 
-    showProjectOptions(response["message"]);
+    showProjectOptions(projects);
 };
 
-async function textSubmit(e, serverAddress, functionActivated) {
+async function textSubmit(e, functionActivated) {
     if (e.keyCode !== 13){
         return
     }
@@ -35,10 +32,10 @@ async function textSubmit(e, serverAddress, functionActivated) {
 
     switch(functionActivated){
         case 'createNewUser':
-            createNewUser(serverAddress)
+            createNewUser()
             break;
         case 'createNewProject':
-            createNewProject(serverAddress)
+            createNewProject()
             break;
     };
 
@@ -49,31 +46,9 @@ async function textSubmit(e, serverAddress, functionActivated) {
  * 
  * @param {*} serverAddress address of the server hosting inSPIRE-interact.
  */
-async function createNewUser(serverAddress) {
+async function createNewUser() {
     //Disable the create user button.
-    document.getElementById('create-user-button').disabled = "disabled";
-    
-    let newUser = document.getElementById('new-user-input').value;
-
-    var response = await fetch(
-        'http://' + serverAddress + ':5000/interact/user/' + newUser,
-        {
-            method: 'GET',
-        }
-    ).then( response => {
-        return response.json();
-    });
-
-    let opt = document.createElement('option');
-    opt.value = newUser;
-    opt.innerHTML = newUser;
-
-    let userSelection = document.getElementById('user-selection');
-    userSelection.appendChild(opt);
-    userSelection.selectedIndex = userSelection.options.length-1;
-
-
-    showProjectOptions(response["message"]);
+    alert('This is a demo site. Creating new users is not possible. Try using the exampleUser.')
 };
 
 
@@ -117,31 +92,8 @@ function resetSelect(element) {
  * 
  * @param {*} serverAddress  address of the server hosting inSPIRE-interact.
  */
-async function createNewProject(serverAddress) {
-    //Disable the create project button.
-    document.getElementById('create-project-button').disabled = "disabled";
-
-
-    let user = document.getElementById('user-selection').value;
-    let newProject = document.getElementById('new-project-input').value;
-    var response = await fetch(
-        'http://' + serverAddress + ':5000/interact/project/' + user + '/' + newProject,
-        {
-            method: 'GET',
-        }
-    ).then( response => {
-        return response.json();
-    });
-
-    let opt = document.createElement('option');
-    opt.value = newProject;
-    opt.innerHTML = newProject;
-
-    let projectSelection = document.getElementById('project-selection');
-    projectSelection.appendChild(opt);
-    projectSelection.selectedIndex = projectSelection.options.length-1;
-
-    showWorkflowOptions();
+async function createNewProject() {
+    alert('This is a demo site. Creating new projects is not possible. Try selecting the example project.')
 };
 
 /**
@@ -150,18 +102,7 @@ async function createNewProject(serverAddress) {
  * @param {*} serverAddress address of the server hosting inSPIRE-interact. 
  * @param {*} selectedProject project selected by the user.
  */
-async function selectProject(serverAddress, selectedProject) {
-    let user = document.getElementById('user-selection').value;
-    var response = await fetch(
-        'http://' + serverAddress + ':5000/interact/project/' + user + '/' + selectedProject,
-        {
-            method: 'GET',
-        }
-    ).then( response => {
-        return response.json();
-    });
-   
-   
+async function selectProject() {   
     showWorkflowOptions();
 };
 
@@ -183,25 +124,18 @@ function showWorkflowOptions() {
  * 
  * @param {*} value user's choice of workflow. 
  */
-function selectWorkflow(value, serverAddress) {
+function selectWorkflow(value) {
     let user = document.getElementById('user-selection').value;
     let project = document.getElementById('project-selection').value;
 
     switch(value){
-        case 'deleteProjectData':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/delete/' + user + '/' + project;  
-            break;
-        
-        case 'downloadProjectData': 
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/download/' + user + '/' + project;  
-            break;
             
         case 'results':
-            window.location.href = 'http://' + serverAddress + ':5000/interact/' + user + '/' + project + '/inspire'
+            window.location.href = 'https://quantsysbio.github.io/interact/results/' + user + '/' + project;
             break;
 
         case 'inspire':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/usecase/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/usecase/' + user + '/' + project;  
             break;
     };
 };
