@@ -127,11 +127,11 @@ function showWorkflowOptions() {
 function selectWorkflow(value) {
     switch(value){
         case 'results':
-            window.location.href = 'https://quantsysbio.github.io/interact/results/';
+            window.location.href = 'https://quantsysbio.github.io/interact/usecase.html';
             break;
 
         case 'inspire':
-            window.location.href = 'https://quantsysbio.github.io/interact/usecase/';
+            window.location.href = 'https://quantsysbio.github.io/interact/usecase.html';
             break;
     };
 };
@@ -190,6 +190,10 @@ async function checkFilePattern(file_type) {
             'WSoh_CBarbosa_170622_240822_Lumos_A30_R1.raw',
             'WSoh_CBarbosa_170622_240822_Lumos_A30_R2.raw',
         ];
+    } else if (file_type === 'search') {
+        var filesFound = [
+            '1_DB_search_psm.csv'
+        ];
     }
 
     if (file_type !== 'blank') {
@@ -197,25 +201,20 @@ async function checkFilePattern(file_type) {
         updateListElement(file_type + "-file-list", filesFound);
 
         if (file_type === 'search') {
-            var response = await fetch(
-                'http://' + serverAddress + ':5000/interact/metadata/' + user + '/' + project + '/' + file_type,
-                {
-                    method: 'GET',
-                }
-            ).then( response => {
-                return response.json();
-            });
-            metaDict = response['message'];
+            var metaDict = {
+                'runFragger': 0,
+                'searchEngine': 'peaks',
+            };
             if (Object.keys(metaDict).length !== 0) {
                 if (metaDict['runFragger'] == 1) {
                     document.getElementById('search-required-selection').value = 'searchNeeded';
-                    selectSearchType('searchNeeded', serverAddress, user, project)
+                    selectSearchType('searchNeeded')
                 } else {
-                    selectSearchType('searchDone', serverAddress, user, project)
+                    selectSearchType('searchDone')
                     document.getElementById('search-required-selection').value = 'searchDone';
                     if ('searchEngine' in metaDict){
                         document.getElementById('search-engine-selection').value = metaDict['searchEngine'];
-                        selectSearchEngine(metaDict['searchEngine'], serverAddress, user, project)
+                        selectSearchEngine(metaDict['searchEngine'])
                     }
                 }
             }
@@ -283,53 +282,47 @@ async function updateGUI(currentFrame, serverAddress) {
  * 
  * @param {*} frame frame to be reverted to.
  */
-async function revertGUI(serverAddress, user, project, frame) {
-    var blockIds = [];
-    let deletedIds;
-
+async function revertGUI(frame) {
     switch(frame) {
         case 'usecase':
-            window.location.href = 'http://' + serverAddress + ':5000/interact';  
+            window.location.href = 'https://quantsysbio.github.io/interact/interact.html';  
             break;
 
         case 'ms':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/usecase/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/usecase.html';  
             break;
 
         case 'search':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/ms/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/ms.html';  
             break;
 
         case 'proteome':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/search/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/search.html';  
             break;
 
         case 'parameters':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/proteome/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/proteome.html';  
             break;
     };
-
-    setElementDisplay(blockIds);
-    setElementDisplay(deletedIds, "none");
 }
 
-async function goHome(serverAddress) {
-    window.location.href = 'http://' + serverAddress + ':5000/interact-page/home';
+async function goHome() {
+    window.location.href = 'https://quantsysbio.github.io/inspire-interactive.html';
 }
 
 async function forwardGUI(frame) {
     switch(frame) {
         case 'usecase':
-            window.location.href = 'https://quantsysbio.github.io/interact/ms';  
+            window.location.href = 'https://quantsysbio.github.io/interact/ms.html';  
             break;
         case 'ms':
-            window.location.href = 'https://quantsysbio.github.io/interact/search';  
+            window.location.href = 'https://quantsysbio.github.io/interact/search.html';
             break;
         case 'search':
-            window.location.href = 'https://quantsysbio.github.io/interact/proteome';  
+            window.location.href = 'https://quantsysbio.github.io/interact/proteome.html';
             break;
         case 'proteome':
-            window.location.href = 'https://quantsysbio.github.io/interact/parameters';  
+            window.location.href = 'https://quantsysbio.github.io/interact/parameters.html';
             break;
     };
 
@@ -390,34 +383,18 @@ function updateListElement(listName, array) {
  * 
  * @param {*} value chosen search type.
  */
-function selectSearchType(value, serverAddress, user, project) {
+function selectSearchType(value) {
     switch(value){
         case 'searchDone':
             setElementDisplay(['search-engine-div']);
             break;
         case 'searchNeeded':
             setElementDisplay(['search-engine-div'], displayType='none');
-            var configObject = {
-                'user': user,
-                'project': project,
-                'metadata_type': 'search',
-                'runFragger': 1,
-                'searchEngine': 'msfragger',
-            };
-            postJson(serverAddress, 'metadata', configObject);
             break;
     };
 };
 
-function selectSearchEngine(value, serverAddress, user, project) {
-    var configObject = {
-        'user': user,
-        'project': project,
-        'metadata_type': 'search',
-        'runFragger': 0,
-        'searchEngine': value,
-    };
-    postJson(serverAddress, 'metadata', configObject);
+function selectSearchEngine(value) {
     setElementDisplay([ 'search-column-1', 'search-column-2', 'search-separator']);
 };
 

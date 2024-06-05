@@ -20,7 +20,7 @@
                 <img src="../img/inSPIRE-logo-nobg.png"
                 class = "inSPIRE-logo-nobg" 
                 width = "180px"
-                onclick="goHome('{server_address}')"/>
+                onclick="goHome()"/>
             </dev>
             
             <!-- Header Center-->
@@ -107,7 +107,7 @@
 							<input type="file" id="search-file-upload" class="ms-data-extra" style = "width:100%; font-size: large;"  multiple="true" />
 							<br>
 							<br>
-							<input type="submit" class="ms-data-extra" style = "width:160px ; font-size: large;" onclick="uploadFiles('{{ server_address }}', '{{ user }}', '{{ project }}', 'search')">
+							<input type="submit" class="ms-data-extra" style = "width:160px ; font-size: large;" onclick="uploadFiles()">
 							<p id="search-waiting" style="display:none;">Files uploading...</p>
 							<br>
 							<progress id="progressBar" value="0" max="100" style="width:300px;display:none"></progress>
@@ -123,11 +123,11 @@
 							<p>
 								If you have uploaded incorrect files and need	to delete them, click below:
 							</p>
-							<input autocomplete="off"  type="submit" value="Delete All Files" class="ms-data-extra" style = "width:180px ; font-size: large;" onclick="clearFilePattern('{{ server_address }}', '{{ user }}', '{{ project }}', 'search')">
+							<input autocomplete="off"  type="submit" value="Delete All Files" class="ms-data-extra" style = "width:180px ; font-size: large;" onclick="clearFilePattern()">
 							<p>
 								If you updated files manually, refresh the file list here
 							</p>
-							<input autocomplete="off"  type="submit" value="Refresh File List" class="ms-data-extra" style = "width:180px ; font-size: large;" onclick="checkFilePattern('{{ server_address }}', '{{ user }}', '{{ project }}', 'search')">
+							<input autocomplete="off"  type="submit" value="Refresh File List" class="ms-data-extra" style = "width:180px ; font-size: large;" onclick="checkFilePattern('blank')">
 						</div>
 					</div>
 				</div>
@@ -138,12 +138,12 @@
 
 		<div style = " display:flex; justify-content:center; align-items:center; font-size: larger; ">
 			<div style = "width:200px; margin-left: 60px;">
-				<button id="back-button" class="ms-data-extra-button"  onclick="revertGUI('{{ server_address }}', '{{ user }}', '{{ project }}', 'search')">
+				<button id="back-button" class="ms-data-extra-button"  onclick="revertGUI('search')">
 					&xlarr; Go back
 				</button>
 			</div>
 			<div style = "width:200px;">
-				<button id="forward-button" class="ms-data-extra-button"  onclick="forwardGUI('{{ server_address }}', '{{ user }}', '{{ project }}', 'search')">
+				<button id="forward-button" class="ms-data-extra-button"  onclick="forwardGUI('search')">
 					Proceed &xrarr;
 				</button>
 			</div>

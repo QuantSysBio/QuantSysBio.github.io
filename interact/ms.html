@@ -20,7 +20,7 @@
                 <img src="../img/inSPIRE-logo-nobg.png"
                 class = "inSPIRE-logo-nobg" 
                 width = "180px"
-                onclick="goHome('{server_address}')"/>
+                onclick="goHome()"/>
             </dev>
             
             <!-- Header Center-->
@@ -87,7 +87,7 @@
 						<input type="file"  class="ms-data-extra" style = "font-size: large; " id="ms-file-upload"  multiple="true" />
 						<br>
 						<br>
-						<input autocomplete="off" class="ms-data-extra" style = "width:130px; font-size: large;" type="submit" onclick="uploadFiles('{{ server_address }}', '{{ user }}', '{{ project }}', 'ms')">
+						<input autocomplete="off" class="ms-data-extra" style = "width:130px; font-size: large;" type="submit" onclick="uploadFiles()">
 						<p id="ms-waiting" style="display:none;">Files uploading...</p>
 						<br>
 						<progress id="progressBar" value="0" max="100" style="width:300px;display:none"></progress>
