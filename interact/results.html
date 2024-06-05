@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/styles.css">
+	<script src="../static/index.js">
+		wage.addEventListener("keydown", function (e) {
+			if (e.keyCode === 13) {
+				validate(e);
+			}
+		});
+	</script>
+	<title>inSPIRE-Interactive</title>
+</head>
+<body>
+	<dev class = "page-wrapper">
+	<!-- header -->
+    <dev class  = "header">
+        <dev class = "header-left">
+            <img src="../img/inSPIRE-logo-nobg.png"
+            class = "inSPIRE-logo-nobg" 
+            width = "180px"
+            onclick="goHome()"/>
+        </dev>
+        
+        <!-- Header Center-->
+        <dev class = "home">
+            <a href=https://quantsysbio.github.io/inspire-interactive.html> <p class = "home-text"> Home </p>
+            </a>
+        </dev>
+
+        <dev class = "about-us">
+            <a href=https://quantsysbio.github.io/interact/about.html> <p class = "about-us-text"> About </p>
+            </a>
+        </dev>
+
+        <dev class = "contact">
+            <a href=https://quantsysbio.github.io/interact/contact.html> <p class = "contact-text"> Contact </p>
+            </a>
+        </dev>
+
+        <dev class = "FAQ">
+            <a href=https://quantsysbio.github.io/interact/faq.html> <p class = "FAQ-text"> FAQ </p>
+            </a>
+        </dev>
+
+        <dev class = "view-queue">
+            <a href=https://quantsysbio.github.io/interact/view-queue.html> <p class = "view-queue-text">Job Queue</p>
+            </a>
+        </dev>
+
+        <dev class = "header-right">
+
+            <button type="button" class = "button-git"  
+                onclick="location.href='https://github.com/QuantSysBio/inSPIRE';">
+                <p>&nbsp;&nbsp;GIT HUB</p>
+            </button>
+        
+
+       
+            <button type="button" class = "button"
+                onclick="location.href='https://quantsysbio.github.io/interact/interact.html';">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;GET STARTED</p>
+            </button>
+        </dev>
+
+    </dev>
+	<hr>
+    <div style=" width:1404px; margin-left: 15%; text-align: left; ">
+        <p>These are demo results only. Fulls results are available to download with standard inSPIRE-interactive execution.</p>
+    </div>
+
+    <table class="results-table">
+
+		<div class="res-row">
+			<div style="margin-left: 15%; padding-right:6%; width:500px;" class="res-column">
+				<h2>inSPIRE Identification Results</h2>
+				<p id="psm-fdr-increase">
+                    inSPIRE increased overall PSM yield by 30.44% at 1% FDR.
+                </p>
+				Click to 
+				<a href="https://quantsysbio.github.io/interact/inspire-report.html">view the inSPIRE performance report</a>		
+				<br>
+				<br>
+				<img src="../img/psm_fdr_curve.svg">
+				<br>
+			</div>
+
+			<div class="res-column" style="width: 500px;">
+				<h2>inSPIRE Quantitative Report</h2>
+				<p id="psm-fdr-increase">
+                    inSPIRE quantified 3980 peptides via Skyline.
+                </p>
+
+				Click to 
+				<a href="https://quantsysbio.github.io/interact/inspire-quant-report.html">view the inSPIRE quantitative report</a>
+				<br>
+				<br>
+				<img src="../img/peptide_volcano.svg">
+			</div>
+		</div>
+
+		<div class="res-row">
+			<div id="inSpirePerformance" style="visibility: {{ inspire_select_visible }}; margin-left: 15%; ; padding-right:6%; width:500px;"  class="res-column">
+				<h2>inSPIRE-Pathogen Results</h2>
+				<p id="inspire-pathogen-increase">
+                    inSPIRE increased pathogen peptide yield by 91.67%.
+                </p>
+				Click to
+				<a href="https://quantsysbio.github.io/interact/inspire-epitope-report.html">
+					view the inSPIRE epitope report
+				</a>
+				<br>
+				<br>
+				<img src="../img/epitope_bar_plot.svg">
+			</div>
+
+			<div class="res-column" style="width: 500px;">
+				<h2>inSPIRE Execution Logs</h2>
+				<p>Here you can see the details of inSPIRE execution</p>
+				Click to
+				<a href="http://{{ server_address }}:5000/interact-page/parameters/{{ user }}/{{ project }}">re-execute the pipeline with alternative parameters.</a>
+				<br>
+				<br>
+				<img src="../img/progress.svg">
+			</div>
+		</table>
+	</div>
+	<br><br>
+
+	{{ inspire_footer|safe }}
+
+	</dev>
+</body>
+</html>
