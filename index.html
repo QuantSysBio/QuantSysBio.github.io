@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../css/styles.css">
-	<script src="../static/index.js">
+    <link rel="stylesheet" href="css/styles.css">
+	<script src="static/index.js">
 		wage.addEventListener("keydown", function (e) {
 			if (e.keyCode === 13) {
 				validate(e);
@@ -17,7 +17,7 @@
 		<!-- header -->
         <dev class  = "header">
             <dev class = "header-left">
-                <img src="../img/qsb-logo.png"
+                <img src="img/qsb-logo.png"
                 class = "inSPIRE-logo-nobg" 
                 width = "180px"
                 onclick="goHome()"/>
@@ -68,12 +68,25 @@
 
 		<hr>
         <br><br>
-        Welcome to the QSB tools page.
-
-        <li>
-            For a preview of inSPIRE-interactive click
-                <a href=https://quantsysbio.github.io/inspire-interactive.html> here</a>.
-        </li>
+        <div class = "download-div">
+			<div style=" width:1404px; padding-left: 30px; text-align: left; background: linear-gradient(to right, aquamarine 40%, #FFFFFF 58%); ">
+			   <p>Welcome to the QSB tools page.</p>
+		   </div>
+	   </div>
+        <br><br>
+        <div id="ms-data-div" style="padding-left: 15%;">
+            For a preview of inSPIRE-interactive click the logo.
+        </div>
+		<p class="contact-main-section" style="text-align: left; align-items: left;">
+            <center>
+                <dev class = "header-left">
+                    <img src="img/inSPIRE-logo-nobg.png"
+                    class = "inSPIRE-logo-nobg" 
+                    width = "180px"
+                    onclick="goHome()"/>
+                </dev>
+            </center>
+        </p>
 			
 	</div> 
 </body>
