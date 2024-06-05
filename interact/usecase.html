@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel='stylesheet' type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
-	<script src="{{url_for('static', filename='index.js')}}"></script>
+
+    <link rel="stylesheet" href="../css/styles.css">
+	<script src="../static/index.js">
+		wage.addEventListener("keydown", function (e) {
+			if (e.keyCode === 13) {
+				validate(e);
+			}
+		});
+	</script>
 	<title>inSPIRE-Interactive</title>
 </head>
 <body>	
@@ -11,7 +18,7 @@
 		<!-- header -->
         <dev class  = "header">
             <dev class = "header-left">
-                <img src="img/inSPIRE-logo-nobg.png"
+                <img src="../img/inSPIRE-logo-nobg.png"
                 class = "inSPIRE-logo-nobg" 
                 width = "180px"
                 onclick="goHome('{server_address}')"/>
@@ -79,14 +86,14 @@
                 <div id="standard-button-div" style = "margin-right:40px;">
                     <button 
                     id="inSPIRE-Standard-button" class="white-black-button"
-                    onclick="selectInspireType('standard', '{{ user }}', '{{ project }}')"
+                    onclick="selectInspireType('standard')"
                     >inSPIRE<br>Standard</button>
                               
                 </div>
                 <div id="select-button-div" style = "margin-left:40px;">
                     <button 
                     id="inSPIRE-Select-button" class="black-white-button"
-                    onclick="selectInspireType('pathogen', '{{ user }}', '{{ project }}')"
+                    onclick="selectInspireType('pathogen')"
                     >inSPIRE<br>Pathogen</button>
                     
                 </div>

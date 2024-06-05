@@ -2,8 +2,8 @@
 <html>
 <head>
 
-    <link rel="stylesheet" href="css/styles.css">
-	<script src="static/index.js">
+    <link rel="stylesheet" href="../css/styles.css">
+	<script src="../static/index.js">
 		wage.addEventListener("keydown", function (e) {
 			if (e.keyCode === 13) {
 				validate(e);
@@ -17,7 +17,7 @@
 		<!-- header -->
         <dev class  = "header">
             <dev class = "header-left">
-                <img src="img/inSPIRE-logo-nobg.png"
+                <img src="../img/inSPIRE-logo-nobg.png"
                 class = "inSPIRE-logo-nobg" 
                 width = "180px"
                 onclick="goHome('{server_address}')"/>
@@ -86,7 +86,7 @@
 				<form>
 					<select id="user-selection" style = "border:2px solid  rgb(5, 208, 141); width:250px; height:40px; font-size: medium;" autocomplete="off" onchange="selectUser(this.value)">
 						<option selected disabled hidden>Select User</option>
-						{{user_list |safe}}
+						<option value="exampleUser">exampleUser</option>
 					</select>
 				</form>
 				<br>
@@ -111,6 +111,7 @@
 				<form>
 					<select id="project-selection" style = "border:2px solid  rgb(5, 208, 141); width:250px; height:40px; font-size: medium;" autocomplete="off" onchange="selectProject()">
 						<option class = "default" selected disabled hidden>Select Project</option>
+						<option value="exampleProject">exampleProject</option>
 					</select>
 				</form>
 				<br>

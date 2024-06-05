@@ -125,65 +125,21 @@ function showWorkflowOptions() {
  * @param {*} value user's choice of workflow. 
  */
 function selectWorkflow(value) {
-    let user = document.getElementById('user-selection').value;
-    let project = document.getElementById('project-selection').value;
-
     switch(value){
-            
         case 'results':
-            window.location.href = 'https://quantsysbio.github.io/interact/results/' + user + '/' + project;
+            window.location.href = 'https://quantsysbio.github.io/interact/results/';
             break;
 
         case 'inspire':
-            window.location.href = 'https://quantsysbio.github.io/interact/usecase/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/usecase/';
             break;
     };
 };
 
 /* ============================================= FUNCTIONAL ============================================= */
 
-async function uploadFiles(serverAddress, user, project, mode) {
-    var selectedFiles = (mode === 'proteome-select') ? [
-            document.getElementById('host-proteome-file-upload').files[0], 
-            document.getElementById('pathogen-proteome-file-upload').files[0]
-        ] 
-        : Array.from(document.getElementById(mode + '-file-upload').files);
-
-    //If file upload was not completed, do not allow users to proceed.
-    if(!checkPreconditions(mode, selectedFiles)) return;
-
-    var multiFormData = new FormData();
-    selectedFiles.forEach ((elem) => {
-        multiFormData.append('files', elem )
-    });
-
-    let waitingTextElem = document.getElementById(mode + "-waiting");
-    waitingTextElem.style.display = 'block';
-
-    //create XHR object to send request
-    var ajax = new XMLHttpRequest(
-        
-    );
-
-    // add progress event to find the progress of file upload 
-    ajax.upload.addEventListener("progress", progressHandler);
-
-    // initializes a newly-created request 
-    ajax.open(
-        "POST",
-        'http://' + serverAddress + ':5000/interact/upload/' + user + '/' + project + '/' + mode
-    ); // replace with your file URL
-
-    ajax.onreadystatechange = () => {
-        // Call a function when the state changes.
-        if (ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200) {
-            checkFilePattern(serverAddress, user, project, mode);
-            waitingTextElem.style.display = "none";
-        }
-    };
-    
-    // send request to the server
-    ajax.send(multiFormData);
+async function uploadFiles() {
+    alert("This site is for demo purpouses only. Files cannot be uploaded.");
 };
 
 function progressHandler(ev) {    
@@ -217,48 +173,53 @@ function checkPreconditions(mode, files) {
  * @param {*} serverAddress 
  * @param {*} file_type 
  */
-async function checkFilePattern(serverAddress, user, project, file_type) {
-    document.getElementById(file_type + "-file-list").innerHTML = "";
+async function checkFilePattern(file_type) {
 
-    var response = await fetch(
-        'http://' + serverAddress + ':5000/interact/checkPattern/' + file_type,
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({'user': user, 'project': project})
-        }
-    ).then( response => {
-        return response.json();
-    });
+    if (file_type === 'ms') {
+        var filesFound = [
+            'WSoh_CBarbosa_170622_240822_Lumos_A25_R1.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A25_R2.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A26_R1.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A26_R2.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A27_R1.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A27_R2.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A28_R1.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A28_R2.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A29_R1.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A29_R2.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A30_R1.raw',
+            'WSoh_CBarbosa_170622_240822_Lumos_A30_R2.raw',
+        ];
+    }
 
-    var filesFound = response['message'];
-    updateListElement(file_type + "-file-list", filesFound);
+    if (file_type !== 'blank') {
 
-    if (file_type === 'search') {
-        var response = await fetch(
-            'http://' + serverAddress + ':5000/interact/metadata/' + user + '/' + project + '/' + file_type,
-            {
-                method: 'GET',
-            }
-        ).then( response => {
-            return response.json();
-        });
-        metaDict = response['message'];
-        if (Object.keys(metaDict).length !== 0) {
-            if (metaDict['runFragger'] == 1) {
-                document.getElementById('search-required-selection').value = 'searchNeeded';
-                selectSearchType('searchNeeded', serverAddress, user, project)
-            } else {
-                selectSearchType('searchDone', serverAddress, user, project)
-                document.getElementById('search-required-selection').value = 'searchDone';
-                if ('searchEngine' in metaDict){
-                    document.getElementById('search-engine-selection').value = metaDict['searchEngine'];
-                    selectSearchEngine(metaDict['searchEngine'], serverAddress, user, project)
+        updateListElement(file_type + "-file-list", filesFound);
+
+        if (file_type === 'search') {
+            var response = await fetch(
+                'http://' + serverAddress + ':5000/interact/metadata/' + user + '/' + project + '/' + file_type,
+                {
+                    method: 'GET',
+                }
+            ).then( response => {
+                return response.json();
+            });
+            metaDict = response['message'];
+            if (Object.keys(metaDict).length !== 0) {
+                if (metaDict['runFragger'] == 1) {
+                    document.getElementById('search-required-selection').value = 'searchNeeded';
+                    selectSearchType('searchNeeded', serverAddress, user, project)
+                } else {
+                    selectSearchType('searchDone', serverAddress, user, project)
+                    document.getElementById('search-required-selection').value = 'searchDone';
+                    if ('searchEngine' in metaDict){
+                        document.getElementById('search-engine-selection').value = metaDict['searchEngine'];
+                        selectSearchEngine(metaDict['searchEngine'], serverAddress, user, project)
+                    }
                 }
             }
-        }
+        };
     };
 }
 
@@ -268,25 +229,8 @@ async function checkFilePattern(serverAddress, user, project, file_type) {
  * @param {*} serverAddress 
  * @param {*} file_type 
  */
-async function clearFilePattern(serverAddress, user, project, file_type) {
-    document.getElementById(file_type + "-file-list").innerHTML = "";
-
-
-    var response = await fetch(
-        'http://' + serverAddress + ':5000/interact/clearPattern/' + file_type,
-        {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({'user': user, 'project': project})
-        }
-    ).then( response => {
-        return response.json();
-    });
-
-    var filesFound = response['message'];
-    updateListElement(file_type + "-file-list", filesFound)
+async function clearFilePattern() {
+    alert("This is a demo site only, can't delete files.");
 }
 
 
@@ -304,7 +248,7 @@ async function updateGUI(currentFrame, serverAddress) {
 
     switch(currentFrame){
         case 'ms':
-            checkFilePattern(serverAddress, 'search');
+            checkFilePattern('search');
             deletedIds = ["ms-data-div"];
             blockIds = ["search-div"];
             break;
@@ -373,19 +317,19 @@ async function goHome(serverAddress) {
     window.location.href = 'http://' + serverAddress + ':5000/interact-page/home';
 }
 
-async function forwardGUI(serverAddress, user, project, frame) {
+async function forwardGUI(frame) {
     switch(frame) {
         case 'usecase':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/ms/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/ms';  
             break;
         case 'ms':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/search/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/search';  
             break;
         case 'search':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/proteome/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/proteome';  
             break;
         case 'proteome':
-            window.location.href = 'http://' + serverAddress + ':5000/interact-page/parameters/' + user + '/' + project;  
+            window.location.href = 'https://quantsysbio.github.io/interact/parameters';  
             break;
     };
 
@@ -427,14 +371,17 @@ function setElementVisibility(ids, visibilityType = 'visible') {
  */
 function updateListElement(listName, array) {
     let ul = document.getElementById(listName);
-
-    array.forEach ((elem) => {
-        var li = document.createElement("li");
-        li.appendChild(document.createTextNode(elem));
-        ul.appendChild(li);
-    });
-
-    ul.style.display = 'block';
+    console.log(Array.from(ul));
+    console.log(ul);
+    if (Array.from(ul).length === 0) {
+        array.forEach ((elem) => {
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(elem));
+            ul.appendChild(li);
+        });
+    
+        ul.style.display = 'block';
+    }
 }
 
 
@@ -479,15 +426,8 @@ function selectSearchEngine(value, serverAddress, user, project) {
  * 
  * @param {*} value chosen inspire type.
  */
-async function selectInspireType(value, serverAddress, user, project) {
-    var configObject = {
-        'user': user,
-        'project': project,
-        'metadata_type': 'core',
-        'variant': value,
-    };
-    await postJson(serverAddress, 'metadata', configObject);
-    forwardGUI(serverAddress, user, project, 'usecase');
+async function selectInspireType(value) {
+    forwardGUI('usecase');
 };
 
 /**
