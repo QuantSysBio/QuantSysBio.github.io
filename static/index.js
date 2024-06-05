@@ -127,7 +127,7 @@ function showWorkflowOptions() {
 function selectWorkflow(value) {
     switch(value){
         case 'results':
-            window.location.href = 'https://quantsysbio.github.io/interact/usecase.html';
+            window.location.href = 'https://quantsysbio.github.io/interact/results.html';
             break;
 
         case 'inspire':
@@ -476,17 +476,29 @@ function replicateCheck(col, file_name, item, index) {
     }
 };
 
-async function parametersCheck(serverAddress, user, project)
+async function parametersCheck()
 {
-    var response = await fetch(
-        'http://' + serverAddress + ':5000/interact/metadata/' + user + '/' + project + '/parameters',
-        {
-            method: 'GET',
-        }
-    ).then( response => {
-        return response.json();
-    });
-    metaDict = response['message'];
+    var metaDict = {
+        'additionalConfigs': {
+            'engineScoreCut': '20.4',
+            'remapToProteome': 'True',
+        },
+        'alleles': 'H-2-Kb',
+        'controlFlags': 'WSoh_CBarbosa_170622_240822_Lumos_A28_R1,WSoh_CBarbosa_170622_240822_Lumos_A28_R2,WSoh_CBarbosa_170622_240822_Lumos_A29_R1,WSoh_CBarbosa_170622_240822_Lumos_A29_R2,WSoh_CBarbosa_170622_240822_Lumos_A30_R1,WSoh_CBarbosa_170622_240822_Lumos_A30_R2,',
+        'ms1Accuracy': '5',
+        'mzAccuracy': '0.02',
+        'mzUnits': 'Da',
+        'runQuantification': 1,
+        'technicalReplicates': [
+            ['WSoh_CBarbosa_170622_240822_Lumos_A25_R1', 'WSoh_CBarbosa_170622_240822_Lumos_A25_R2'],
+            ['WSoh_CBarbosa_170622_240822_Lumos_A26_R1', 'WSoh_CBarbosa_170622_240822_Lumos_A26_R2'],
+            ['WSoh_CBarbosa_170622_240822_Lumos_A27_R1', 'WSoh_CBarbosa_170622_240822_Lumos_A27_R2'],
+            ['WSoh_CBarbosa_170622_240822_Lumos_A28_R1', 'WSoh_CBarbosa_170622_240822_Lumos_A28_R2'],
+            ['WSoh_CBarbosa_170622_240822_Lumos_A29_R1', 'WSoh_CBarbosa_170622_240822_Lumos_A29_R2'],
+            ['WSoh_CBarbosa_170622_240822_Lumos_A30_R1', 'WSoh_CBarbosa_170622_240822_Lumos_A30_R2'],
+        ],
+        'useBindingAffinity': 'asFeature',
+    };
 
     if ('ms1Accuracy' in metaDict) {
         document.getElementById('ms1-accuracy-input').value = metaDict['ms1Accuracy'];
@@ -719,7 +731,7 @@ function constructConfigObject(user, project) {
     return configObject;
 }
 
-async function executePipeline(serverAddress, user, project) {
+async function executePipeline() {
 
     let paramSaveElem = document.getElementById("params-save-text");
     paramSaveElem.style.display = "none";
@@ -728,26 +740,13 @@ async function executePipeline(serverAddress, user, project) {
     let loadingElem = document.getElementById("loading-text");
     loadingElem.style.display = "block";
 
-    var configObject = constructConfigObject(user, project);
-
-    var response = await postJson(serverAddress, 'inspire', configObject);
-
-    configObject['metadata_type'] = 'parameters';
-    postJson(serverAddress, 'metadata', configObject);
-
-    makeDownloadVisible(response['message']);
+    makeDownloadVisible("https://quantsysbio.github.io/interact/results.html");
 
 };
 
 
-async function saveParameters(serverAddress, user, project) {
-    let paramSaveElem = document.getElementById("params-save-text");
-    paramSaveElem.style.display = "block";
-
-    configObject = constructConfigObject(user, project);
-    configObject['metadata_type'] = 'parameters';
-    
-    await postJson(serverAddress, 'metadata', configObject);
+async function saveParameters() {
+    alert("Site is for demonstration only. Parameters not updated.")
 };
 
 
