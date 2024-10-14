@@ -312,7 +312,7 @@ async function revertGUI(frame) {
 }
 
 async function goHome() {
-    window.location.href = 'https://quantsysbio.github.io/interact-ms.hml';
+    window.location.href = 'https://quantsysbio.github.io/interact-ms.html';
 }
 
 async function forwardGUI(frame) {
