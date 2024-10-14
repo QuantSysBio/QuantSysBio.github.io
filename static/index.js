@@ -312,7 +312,7 @@ async function revertGUI(frame) {
 }
 
 async function goHome() {
-    window.location.href = 'https://quantsysbio.github.io/inspire-interactive.html';
+    window.location.href = 'https://quantsysbio.github.io/interact-ms.hml';
 }
 
 async function forwardGUI(frame) {
@@ -408,7 +408,7 @@ function selectSearchEngine(value) {
  * 
  * @param {*} value chosen inspire type.
  */
-async function selectInspireType(value) {
+async function selectUseCase(value) {
     forwardGUI('usecase');
 };
 
