@@ -514,6 +514,16 @@ async function parametersCheck()
             document.getElementById('quantification-checkbox').checked = true;
         }
     }
+
+    if ('epitopeCutLevel' in metaDict) {
+        if (metaDict['epitopeCutLevel'] == 'peptide'){
+            document.getElementById('pepseekpep').checked = true;
+        } else {
+            document.getElementById('pepseekpsm').checked = true;
+        }
+    } else {
+        document.getElementById('pepseekpsm').checked = true;
+    }
     if ('useBindingAffinity' in metaDict) {
         if (metaDict['useBindingAffinity'] === 'asFeature') {
             document.getElementById('panfeature').checked = true;
