@@ -17,6 +17,21 @@
 async function selectUser(selectedUser) {
     if (selectedUser === 'exampleUser') {
         var projects = ['exampleProject'];
+    } else if (selectedUser === 'piscesExampleUser'){
+        var projects = [
+            'K562-A0101',
+            'K562-A0201',
+            'K562-A0301',
+            'K562-A1101',
+            'K562-A3001',
+            'K562-A3101',
+            'K562-A6801',
+            'K562-B0702',
+            'K562-B0801',
+            'K562-B1501',
+            'K562-B2705',
+            'K562-B4001',
+        ];
     } else {
         var projects = [];
     }
@@ -127,8 +142,16 @@ function showWorkflowOptions() {
 function selectWorkflow(value) {
     switch(value){
         case 'results':
-            window.location.href = 'https://quantsysbio.github.io/interact/results.html';
-            break;
+            var user = document.getElementById("user-selection").value;
+            if (user === 'exampleUser') {
+                window.location.href = 'https://quantsysbio.github.io/interact/results.html';
+                break;
+            } else {
+                var project = document.getElementById("project-selection").value;
+                console.log(user, project);
+                window.location.href = 'https://quantsysbio.github.io/interact/pisces/' + project + '-results.html';
+                break;
+            }
 
         case 'inspire':
             window.location.href = 'https://quantsysbio.github.io/interact/usecase.html';
@@ -731,7 +754,7 @@ function constructConfigObject(user, project) {
     return configObject;
 }
 
-async function executePipeline() {
+async function executePipeline(variant) {
 
     let paramSaveElem = document.getElementById("params-save-text");
     paramSaveElem.style.display = "none";
@@ -739,9 +762,11 @@ async function executePipeline() {
     
     let loadingElem = document.getElementById("loading-text");
     loadingElem.style.display = "block";
-
-    makeDownloadVisible("https://quantsysbio.github.io/interact/results.html");
-
+    if (variant === 'inspire') {
+        makeDownloadVisible("https://quantsysbio.github.io/interact/results.html");
+    } else {
+        makeDownloadVisible("https://quantsysbio.github.io/interact/pisces/K562-A0101-results.html");
+    }
 };
 
 

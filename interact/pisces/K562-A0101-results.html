@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../css/styles.css">
+	<script src="../../static/index.js">
+		wage.addEventListener("keydown", function (e) {
+			if (e.keyCode === 13) {
+				validate(e);
+			}
+		});
+	</script>
+	<title>interact-ms</title>
+</head>
+<body>
+	<dev class="page-wrapper">
+        <dev class  = "header">
+            <dev class = "header-left">
+                <img src="../../img/inSPIRE-logo-nobg.png"
+                class = "inSPIRE-logo-nobg" 
+                width = "180px"
+                onclick="goHome()"/>
+            </dev>
+
+            <!-- Header Center-->
+            <dev class = "home">
+                <a href=https://quantsysbio.github.io/interact-ms.html> <p class = "home-text"> Home </p>
+                </a>
+            </dev>
+
+            <dev class = "about-us">
+                <a href=https://quantsysbio.github.io/interact/about.html> <p class = "about-us-text"> About </p>
+                </a>
+            </dev>
+
+            <dev class = "contact">
+                <a href=https://quantsysbio.github.io/interact/contact.html> <p class = "contact-text"> Contact </p>
+                </a>
+            </dev>
+
+            <dev class = "FAQ">
+                <a href=https://quantsysbio.github.io/interact/faq.html> <p class = "FAQ-text"> FAQ </p>
+                </a>
+            </dev>
+
+            <dev class = "view-queue">
+                <a href=https://quantsysbio.github.io/interact/view-queue.html> <p class = "view-queue-text">Job Queue</p>
+                </a>
+            </dev>
+
+
+        <dev class = "header-right">
+            <button type="button" class = "button-git"  
+                onclick="location.href='https://github.com/QuantSysBio/interact-ms';">
+                <p>&nbsp;&nbsp;GIT HUB</p>
+            </button>
+            <button type="button" class = "button"
+                onclick="location.href='https://quantsysbio.github.io/interact/interact.html';">
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;GET STARTED</p>
+            </button>
+        </dev>
+        </dev>
+    	<hr>
+
+    	<div class="res-row">
+			<div style="margin-left: 15%; padding-right:6%; width:500px;" class="res-column">
+				<h2>PISCES Identification Results</h2>
+				Click to view the
+					<a href="https://quantsysbio.github.io/interact/pisces/K562-A0101-report.html">
+					PISCES report</a>.
+				<br>
+				<br>
+                <img src="../../img/pisces/A0101_per_stratum.svg">
+				<br>
+			</div>
+			<div class="res-column" style="width: 500px;">
+				<h2>PISCES Quality Control</h2>
+				Click to view the
+					<a href="https://quantsysbio.github.io/interact/pisces/K562-A0101-qc.html">
+					PISCES QC report</a>.
+				<br>
+				<br>
+                <img src="../../img/pisces/A0101_spectral_angle.svg">
+				<br>
+			</div>
+		</div><div class="res-row">
+
+			<div id="res-column" style="margin-left: 15%; ; padding-right:6%; width:500px;" class="res-column">
+					<h2>PISCES Execution Logs</h2>
+				<p>Here you can see the details of the execution</p>
+				Click to 
+				<a href="http://s1604-calc02:5000/interact-page/parameters/pisces_ip/K562-A0101"> re-execute the pipeline with alternative parameters.</a>
+				<br>
+				<br>
+                <img src="../../img/pisces/progress.svg">
+			</div>
+		</div><table class="results-table">
+
+		
+
+		
+
+
+	</table>
+	<br><br>
+
+	<div class = "bottom">
+        <div class = "footer">
+            <p>
+                <b>
+                    Disclaimer: This is demo version of the tool for learning and preview. It does not
+                    run an interact-ms analyses.<br>
+                    If you use this tool, please don't forget 
+                    to cite related <a href = "https://quantsysbio.github.io/interact/references.html">articles</a>.
+                </b>
+            </p>
+        </div>
+    </div>
+
+	</dev>
+</body>
+</html>
