@@ -595,6 +595,54 @@ async function parametersCheck()
     }
 }
 
+
+async function parametersPiscesCheck()
+{
+    var metaDict = {
+        'alleles': 'HLA-A0101',
+        'ms1Accuracy': '5',
+        'mzAccuracy': '0.02',
+        'mzUnits': 'Da',
+        'runQuantification': 1,
+        'useBindingAffinity': 'asFeature',
+    };
+
+    if ('ms1Accuracy' in metaDict) {
+        document.getElementById('ms1-accuracy-input').value = metaDict['ms1Accuracy'];
+    }
+    if ('mzAccuracy' in metaDict) {
+        document.getElementById('ms2-accuracy-input').value = metaDict['mzAccuracy'];
+    }
+    if ('mzUnits' in metaDict) {
+        document.getElementById('ms2-unit-selection').value = metaDict['mzUnits'];
+    }
+
+    if ('useBindingAffinity' in metaDict) {
+        if (metaDict['useBindingAffinity'] === 'asFeature') {
+            document.getElementById('panfeature').checked = true;
+            document.getElementById('netmhcpan-allele-div').style.display = 'block';
+        } else if (metaDict['useBindingAffinity'] === 'asValidation') {
+            document.getElementById('panvalidation').checked = true;
+            document.getElementById('netmhcpan-allele-div').style.display = 'block';
+        }
+    }
+    if ('runQuantification' in metaDict) {
+        if (metaDict['runQuantification'] === 1){
+            document.getElementById('quantification-checkbox').checked = true;
+            revealElement(
+                document.getElementById('quantification-checkbox'),
+                'quantification-div'
+            )
+            document.getElementById('quant-idp').value = 0.5;
+            document.getElementById('quant-prec-count').value = 3;
+        }
+    }
+    if ('alleles' in metaDict) {
+        document.getElementById('netmhcpan-allele-div').style.display = 'block';
+        document.getElementById('netmhcpan-allele-input').value = metaDict['alleles'];
+    }
+}
+
 /**
  * POSTs JSON data to an Interact endpoint.
  * 
@@ -752,6 +800,14 @@ function constructConfigObject(user, project) {
     ).checked) ? 1 : 0;
     configObject['additionalConfigs'] = additionalConfigs;
     return configObject;
+}
+
+function revealElement(checkbox, divToShow) {
+    if (checkbox.checked) {
+        document.getElementById(divToShow).style.display = 'block';
+    } else {
+        document.getElementById(divToShow).style.display = 'none';
+    };
 }
 
 async function executePipeline(variant) {
