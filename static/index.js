@@ -213,18 +213,36 @@ async function checkFilePattern(file_type) {
             'WSoh_CBarbosa_170622_240822_Lumos_A30_R1.raw',
             'WSoh_CBarbosa_170622_240822_Lumos_A30_R2.raw',
         ];
+    } else if (file_type === 'ms-pisces') {
+        var filesFound = [
+            'WSoh_Meghna_100424_030524_Expl2_K562_A0101_HC1_R3.raw',
+        ];
     } else if (file_type === 'search') {
         var filesFound = [
             '1_DB_search_psm.csv'
+        ];
+    } else if (file_type === 'search-pisces') {
+        var dbFilesFound = [
+            '1_DB_search_psm.csv'
+        ];
+        var dnFilesFound = [
+            'WSoh_Meghna_100424_030524_Expl2_K562_A0101_HC1_R3.mztab',
         ];
     } else if (file_type === 'proteome') {
         var filesFound = [
             'proteome_combined.fasta', 'host_host_MusMusculus.fasta',
             'pathogen_pathogen_Listeria.fasta',
         ];
+    } else if (file_type === 'proteome-pisces') {
+        var filesFound = [
+            'CDS_main_ORF.fasta',
+        ];
     }
 
-    if (file_type !== 'blank') {
+    if (file_type === 'search-pisces') {
+        updateListElement("search-pisces-db-file-list", dbFilesFound);
+        updateListElement("search-pisces-dn-file-list", dnFilesFound);
+    } else if (file_type !== 'blank') {
 
         updateListElement(file_type + "-file-list", filesFound);
 
@@ -338,19 +356,35 @@ async function goHome() {
     window.location.href = 'https://quantsysbio.github.io/interact-ms.html';
 }
 
-async function forwardGUI(frame) {
+async function forwardGUI(frame, value) {
     switch(frame) {
         case 'usecase':
-            window.location.href = 'https://quantsysbio.github.io/interact/ms.html';  
+            if (value === 'pisces') {
+                window.location.href = 'https://quantsysbio.github.io/interact/ms-pisces.html';  
+            } else {
+                window.location.href = 'https://quantsysbio.github.io/interact/ms.html';  
+            };
             break;
         case 'ms':
-            window.location.href = 'https://quantsysbio.github.io/interact/search.html';
+            if (value === 'pisces') {
+                window.location.href = 'https://quantsysbio.github.io/interact/search-pisces.html';  
+            } else {
+                window.location.href = 'https://quantsysbio.github.io/interact/search.html';
+            };
             break;
         case 'search':
-            window.location.href = 'https://quantsysbio.github.io/interact/proteome.html';
+            if (value === 'pisces') {
+                window.location.href = 'https://quantsysbio.github.io/interact/proteome-pisces.html';
+            } else {
+                window.location.href = 'https://quantsysbio.github.io/interact/proteome.html';
+            };
             break;
         case 'proteome':
-            window.location.href = 'https://quantsysbio.github.io/interact/parameters.html';
+            if (value === 'pisces') {
+                window.location.href = 'https://quantsysbio.github.io/interact/parameters-pisces.html';
+            } else {
+                window.location.href = 'https://quantsysbio.github.io/interact/parameters.html';
+            };
             break;
     };
 
@@ -392,8 +426,6 @@ function setElementVisibility(ids, visibilityType = 'visible') {
  */
 function updateListElement(listName, array) {
     let ul = document.getElementById(listName);
-    console.log(Array.from(ul));
-    console.log(ul);
     if (Array.from(ul).length === 0) {
         array.forEach ((elem) => {
             var li = document.createElement("li");
@@ -422,9 +454,19 @@ function selectSearchType(value) {
     };
 };
 
-function selectSearchEngine(value) {
-    setElementDisplay([ 'search-column-1', 'search-column-2', 'search-separator']);
+function selectSearchEngine(value, variant='standard') {
+    if (variant === 'pisces') {
+        setElementDisplay([ 'pisces-db-upload']);
+    } else {
+        setElementDisplay([ 'search-column-1', 'search-column-2', 'search-separator', ]);
+    }
 };
+
+function selectDeNovoType(value) {
+    if (value === 'deNovoDone') {
+        setElementDisplay(['de-novo-upload-div']);
+    };
+}
 
 /**
  * Sets the inspire type according to the user's choice, additionally updating the GUI to reflect the choice.
@@ -432,7 +474,7 @@ function selectSearchEngine(value) {
  * @param {*} value chosen inspire type.
  */
 async function selectUseCase(value) {
-    forwardGUI('usecase');
+    forwardGUI('usecase', value);
 };
 
 /**

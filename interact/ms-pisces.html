@@ -11,7 +11,7 @@
 	</script>
 	<title>interact-ms</title>
 </head>
-<body onload="checkFilePattern('ms')">	
+<body onload="checkFilePattern('ms-pisces')">	
 	<!-- main page-->
 	<dev class = "page-wrapper">
         <!-- header -->
@@ -88,18 +88,18 @@
 						<br>
 						<br>
 						<input autocomplete="off" class="ms-data-extra" style = "width:130px; font-size: large;" type="submit" onclick="uploadFiles()">
-						<p id="ms-waiting" style="display:none;">Files uploading...</p>
+						<p id="ms-pisces-waiting" style="display:none;">Files uploading...</p>
 						<br>
 						<progress id="progressBar" value="0" max="100" style="width:300px;display:none"></progress>
 						<p id="loaded_n_total"></p>
-						<p id="ms-no-files" style="display:none; color:red;">Please upload a file before proceeding.</p>
+						<p id="ms-pisces-no-files" style="display:none; color:red;">Please upload a file before proceeding.</p>
 					</div>
 
 					<div class="vl"></div>
 
 					<div style="margin-left: 5%; border-right: auto;">
 						<p>Or check the currently uploaded files:</p>
-							<ul id="ms-file-list"></ul>
+							<ul id="ms-pisces-file-list"></ul>
 						<p>
 							If you have uploaded incorrect files and need	to delete them, click below:
 						</p>
@@ -121,7 +121,7 @@
 				</button>
 			</div>
 			<div style = "width:200px;">
-				<button id="forward-button"  class="ms-data-extra-button"  onclick="forwardGUI('ms', 'inspire')">
+				<button id="forward-button"  class="ms-data-extra-button"  onclick="forwardGUI('ms', 'pisces')">
 					Proceed &xrarr;
 				</button>
 			</div>
