@@ -1222,6 +1222,32 @@ input[type="checkbox"]{
 }
 
 
+/* This Part is for Pisces coming soon styles */
+.middle{
+        display:flex;
+        padding-top: 150px;
+         padding-bottom: 450px;
+        height:150px;
+        flex-direction: row;
+        justify-content:space-around;
+        align-items:center;
+        margin-bottom: 15px
+        }
+        
+.coming-soon{
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+
+
+/* ---------------------------------------------------------- */
+
 
 a{
     text-decoration: none;
